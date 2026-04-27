@@ -2,6 +2,7 @@ package com.iit.web.Dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public record CreateComplaintDto(
         String category,
@@ -15,9 +16,7 @@ public record CreateComplaintDto(
         String room,
         LocalDate incidentDate,
         LocalTime incidentTime,
-        Byte[] evidence,
-        Integer[] accusedIds,
+        List<Integer> accusedIds,
         String witnesses
-        )
-{
+) {
 }

@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+@RequestMapping("/users")
 @RestController
 public class UserController
 {
-    @Autowired
-    UserRepo userRepo;
+    private final UserRepo userRepo;
 
-    @GetMapping("/users")
+    @Autowired
+    public UserController(UserRepo userRepo)
+    {
+        this.userRepo = userRepo;
+    }
+
+    @GetMapping("/find")
     public List<UserInfoForAccusedDto> getUsersForAccused(@RequestParam String query){
         return userRepo.findByName(query);
     }
