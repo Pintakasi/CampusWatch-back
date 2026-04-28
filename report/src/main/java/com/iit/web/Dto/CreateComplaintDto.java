@@ -17,6 +17,7 @@ public record CreateComplaintDto(
         LocalDate incidentDate,
         LocalTime incidentTime,
         List<Integer> accusedIds,
-        String witnesses
+        String witnesses,
+        String accusedDescription
 ) {
 }

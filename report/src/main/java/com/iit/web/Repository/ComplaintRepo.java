@@ -26,8 +26,8 @@ public class ComplaintRepo
         String sql = "INSERT INTO complaints " +
                 "(report_ticket_num, fk_reporter, category, description, priority_level," +
                 " location_scope, nearest_building, outside_area, building, floor, room," +
-                " created_at, evidence, incident_date, incident_time, witnesses, assigned_admin) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                " created_at, evidence, incident_date, incident_time, witnesses, assigned_admin, accused_description) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         String reportTicketId = IdGenerator.generateId();
 
@@ -54,7 +54,8 @@ public class ComplaintRepo
                 dto.incidentDate(),
                 dto.incidentTime(),
                 dto.witnesses(),
-                "BEHAVIORAL"
+                "BEHAVIORAL",
+                dto.accusedDescription()
         );
 
         if (dto.accusedIds() != null && !dto.accusedIds().isEmpty()) {
