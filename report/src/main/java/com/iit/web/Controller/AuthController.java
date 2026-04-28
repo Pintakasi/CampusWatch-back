@@ -29,11 +29,11 @@ public class AuthController
         session.setAttribute("userId", user.getId());
         session.setAttribute("role", user.getRole());
 
-        System.out.println("Session ID: " + session.getId());
-
         return ResponseEntity.ok(Map.of(
                 "role", user.getRole(),
-                "userId", user.getId()
+                "userId", user.getId(),
+                "firstName", user.getFirstName(),
+                "department", user.getDepartment()
         ));
     }
     @PostMapping("/logout")
