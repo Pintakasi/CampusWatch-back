@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class ComplaintRepo
@@ -36,6 +37,13 @@ public class ComplaintRepo
             evidenceBytes = evidence.getBytes();
         }
 
+        String catGrouping;
+        if(dto.category().startsWith("B")){
+            catGrouping = "BEHAVIORAL";
+        }else{
+            catGrouping = "MAINTENANCE";
+        }
+
         jdbc.update(
                 sql,
                 reportTicketId,
@@ -54,16 +62,14 @@ public class ComplaintRepo
                 dto.incidentDate(),
                 dto.incidentTime(),
                 dto.witnesses(),
-                "BEHAVIORAL",
+                catGrouping,
                 dto.accusedDescription()
         );
 
-        if (dto.accusedIds() != null && !dto.accusedIds().isEmpty()) {
+        List<Integer> accusedIds = dto.accusedIds();
+        if (accusedIds != null && !accusedIds.isEmpty()) {
             String s = "INSERT INTO Complaints_Accused (fk_report_ticket_id, fk_accused_id) VALUES (?, ?)";
-
-            for (Integer id : dto.accusedIds()) {
-                jdbc.update(s, reportTicketId, id);
-            }
+            accusedIds.forEach(id -> jdbc.update(s,reportTicketId,id));
         }
     }
 }
