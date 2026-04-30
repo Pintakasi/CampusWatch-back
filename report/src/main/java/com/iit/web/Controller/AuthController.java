@@ -44,6 +44,7 @@ public class AuthController
 
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(HttpSession session) {
+
         String role = (String) session.getAttribute("role");
         var userId = session.getAttribute("userId");
 
