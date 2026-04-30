@@ -1,11 +1,13 @@
 package com.iit.web.Dto;
 
+import com.iit.web.enums.ComplaintCategory;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 public record CreateComplaintDto(
-        String category,
+        ComplaintCategory category,
         String description,
         Integer priorityLevel,
         String locationScope,

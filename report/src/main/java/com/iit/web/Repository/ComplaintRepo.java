@@ -27,7 +27,7 @@ public class ComplaintRepo
         String sql = "INSERT INTO complaints " +
                 "(report_ticket_num, fk_reporter, category, description, priority_level," +
                 " location_scope, building, floor, room, zone, specific_location," +
-                " created_at, evidence, incident_date, incident_time, witnesses, accused_description, assigned_admin) " +
+                " created_at, evidence, incident_date, incident_time, witnesses, accused_description, assigned_office) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         String reportTicketId = IdGenerator.generateId();
@@ -37,18 +37,11 @@ public class ComplaintRepo
             evidenceBytes = evidence.getBytes();
         }
 
-        String assignedAdmin;
-        if(dto.category().startsWith("B")){
-            assignedAdmin = "BEHAVIORAL";
-        }else{
-            assignedAdmin = "MAINTENANCE";
-        }
-
         jdbc.update(
                 sql,
                 reportTicketId,
                 reporter_id,
-                dto.category(),
+                dto.category().name(),
                 dto.description(),
                 dto.priorityLevel(),
                 dto.locationScope(),
@@ -63,7 +56,7 @@ public class ComplaintRepo
                 dto.incidentTime(),
                 dto.witnesses(),
                 dto.accusedDescription(),
-                assignedAdmin
+                dto.category().getAssignedOffice().name()
 
         );
 

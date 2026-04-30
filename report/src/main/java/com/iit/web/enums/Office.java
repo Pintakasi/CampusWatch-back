@@ -1,6 +1,6 @@
 package com.iit.web.enums;
 
-public enum Offices
+public enum Office
 {
     BEHAVIORAL,
     MAINTENANCE
