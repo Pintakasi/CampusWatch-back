@@ -9,15 +9,17 @@ public record CreateComplaintDto(
         String description,
         Integer priorityLevel,
         String locationScope,
-        String nearestBuilding,
-        String outsideArea,
         String building,
         Integer floor,
         String room,
+        String specificLocation,
+        String zone,
         LocalDate incidentDate,
         LocalTime incidentTime,
         List<Integer> accusedIds,
         String witnesses,
-        String accusedDescription
-) {
+        String accusedDescription,
+        Boolean isHazardous
+)
+{
 }
